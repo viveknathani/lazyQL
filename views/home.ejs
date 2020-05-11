@@ -1,9 +1,52 @@
 <html>
     <head>
         <title>lazyQL</title>
+        <link href="/assets/home.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
-        <p>You are getting this from the server.</p>
+
+        <div id="introduction">
+
+            <p id="logo_title">lazyQL</p>
+            <img src="/assets/lazyQL_logo.png">
+            <p id="tagline">minimalist web interface for your databases</p>
+
+        </div>
+
+        <div id="database_form">
+
+            <form method="post" id="homepage_form">
+                <input type="text" id="db_name" placeholder="create database">
+            </form>
+
+        </div>
+
+        <div id="containlist">
+
+            <table>
+
+                <tr>
+                    <th class="first_column">Database 1</th>
+                    <th><button type="button">Create table</button></th>
+                    <th><button type="button">Generate .sql file</button></th>
+                </tr>
+
+                <tr>
+                    <td colspan="3">Table 1</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">Table 2</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">Table 3</td>
+                </tr>
+
+            </table>
+
+        </div>
+
     </body>
 </html>

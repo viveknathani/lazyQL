@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap');
+
+body{
+    font-family: Roboto;
+}
+
+#introduction, #database_form, #containlist{
+    text-align: center;
+}
+
+img{
+    width: 8%;
+    height: 15%;
+    margin-top: -11%;
+    margin-left: 20%;
+}
+
+#logo_title{
+    color: #FF7B00;
+    font-weight: bold;
+    font-size: 80px;
+    margin-top: 1%;
+}
+
+#tagline{
+    margin-top: -4%;
+    font-weight: 100;
+    font-size: 40px;
+    margin-left: 4%;
+    font-weight: 300;
+}
+
+#db_name{
+    height: 40px;
+    width: 30%;
+    padding: 5px;
+    font-size: 24px;
+    margin-left: 3%;
+    text-align: left;
+    border-color: rgb(58, 58, 58);
+    border-width: 1px 1px 1px 1px;
+    background: transparent;
+}
+
+#containlist{
+    margin-top: 5%;
+    margin-left: 3%;
+}
+table{
+    margin: auto;
+}
+
+.first_column{
+    width: 60%;
+}
+
+th{
+    font-size: 24px;
+    text-align: left;
+}
+
+td{
+    padding: 10px;   
+    border: 1px solid;
+}
+
+button {
+    padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0.317rem;
+	background-color: #FF7B00;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 1rem;
+    line-height: 1.5;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	cursor: pointer;
+	-webkit-appearance: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+button:hover {
+	opacity: 0.85;
+}
+
+
