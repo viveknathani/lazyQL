@@ -1,3 +1,5 @@
+const databaseHandler = require('../models/dbhandle');
+
 module.exports = function(app)
 {
     app.get('/', function(req, res)
@@ -15,3 +17,5 @@ module.exports = function(app)
 
     } );
 }
+
+databaseHandler.createDatabase('db');
