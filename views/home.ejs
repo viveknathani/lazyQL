@@ -2,6 +2,7 @@
     <head>
         <title>lazyQL</title>
         <link href="/assets/home.css" type="text/css" rel="stylesheet">
+        <script defer src="/assets/color.js"></script>
     </head>
 
     <body>
@@ -17,17 +18,20 @@
         <div id="database_form">
 
             <form method="post" id="homepage_form">
-                <input type="text" id="db_name" placeholder="create database">
+                <input type="text" id="db_name" name="db_name" value="" placeholder="create database">
             </form>
+            <p id="message">
+                <%= name %>
+            </p>
 
         </div>
 
         <div id="containlist">
-
+            
+            <% for(let i = 0; i<dbnames.length; i++) { %>
             <table>
-
                 <tr>
-                    <th class="first_column">Database 1</th>
+                    <th class="first_column"><%= dbnames[i] %></th>
                     <th><button type="button">Create table</button></th>
                     <th><button type="button">Generate .sql file</button></th>
                 </tr>
@@ -45,6 +49,7 @@
                 </tr>
 
             </table>
+            <% } %>
 
         </div>
 
