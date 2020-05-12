@@ -30,7 +30,6 @@ function createDatabase(databaseName, msgObject)
                 if(err)
                 {
                     msgObject.text = 'Try a different name, this exists.';
-                    msgObject.color = 'red';
                     console.log('Name already exists.');
                     console.log(msgObject);
                 }
@@ -38,7 +37,6 @@ function createDatabase(databaseName, msgObject)
                 {
                     console.log('Database created');
                     msgObject.text = 'Perfect';
-                    msgObject.color = 'green';
 
                     let useDB = `use lazyQL;`;
                     let updateOurDatabase = `insert into List (Names) values ('${databaseName}');`;
@@ -60,11 +58,34 @@ function createDatabase(databaseName, msgObject)
         else
         {
             msgObject.text = 'Invalid name';
-            msgObject.color = 'red';
             console.log('Invalid name for a database');
             console.log(msgObject);
         }
     } );
 }
 
-module.exports = { createDatabase : createDatabase };
+function getDatabasesList(namesList)
+{
+
+            let useDB = `use lazyQL;`;   
+            let query = `select * from List`;
+            connectionHandler.query(useDB, 
+                (err, result) => { 
+                                    if (err) console.log('Syntax Error');
+                                    else console.log('Fetching list from lazyQL database...');
+                                 } );  
+            connectionHandler.query(query, 
+                (err, result) => { 
+                                    if (err) console.log('Syntax Error');
+                                    else
+                                    {
+                                        for(let i=0; i<result.length; i++)
+                                        {
+                                            namesList[i]=result[i].Names;
+                                        }
+                                    }              
+                                 } );
+                                 
+}
+
+module.exports = { createDatabase : createDatabase, getList : getDatabasesList };
