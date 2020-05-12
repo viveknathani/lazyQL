@@ -8,7 +8,7 @@ const connectionHandler = mysql.createConnection(
         password : 'password'
     } );
 
-function createDatabase(databaseName)
+function createDatabase(databaseName, msgObject)
 {
     //removing trailing whitespaces
     databaseName = databaseName.replace(/\s+$/, '');
@@ -27,11 +27,43 @@ function createDatabase(databaseName)
             let dbQuery=`create database ${databaseName}`;
             connectionHandler.query(dbQuery, function(err, result) 
             {
-                if(err) console.log('Name already exists.');
-                else console.log('Database created.');
+                if(err)
+                {
+                    msgObject.text = 'Try a different name, this exists.';
+                    msgObject.color = 'red';
+                    console.log('Name already exists.');
+                    console.log(msgObject);
+                }
+                else
+                {
+                    console.log('Database created');
+                    msgObject.text = 'Perfect';
+                    msgObject.color = 'green';
+
+                    let useDB = `use lazyQL;`;
+                    let updateOurDatabase = `insert into List (Names) values ('${databaseName}');`;
+                    connectionHandler.query(useDB, 
+                                    (err, result) => { 
+                                                        if (err) console.log('Syntax Error');
+                                                        else console.log('Upating lazyQL database...');
+                                                     } );
+                    connectionHandler.query(updateOurDatabase, 
+                                    (err, result) => { 
+                                                        if (err) console.log('Syntax Error');
+                                                        else console.log('lazQL database updated.');
+                                                     } );
+
+                    console.log(msgObject);                        
+                }
             } );
         }
-        else console.log('Invalid name for a database');
+        else
+        {
+            msgObject.text = 'Invalid name';
+            msgObject.color = 'red';
+            console.log('Invalid name for a database');
+            console.log(msgObject);
+        }
     } );
 }
 
