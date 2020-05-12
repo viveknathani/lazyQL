@@ -35,5 +35,4 @@ function createDatabase(databaseName)
     } );
 }
 
-createDatabase('vivek');
 module.exports = { createDatabase : createDatabase };
