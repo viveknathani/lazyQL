@@ -1,3 +1,5 @@
+'use strict';
+
 const mysql = require('mysql');
 
 const connectionHandler = mysql.createConnection( 
@@ -64,7 +66,7 @@ function createDatabase(databaseName, msgObject)
     } );
 }
 
-function getDatabasesList(namesList)
+function getDatabasesList(namesList, tablesList)
 {
 
             let useDB = `use lazyQL;`;   
@@ -88,4 +90,44 @@ function getDatabasesList(namesList)
                                  
 }
 
-module.exports = { createDatabase : createDatabase, getList : getDatabasesList };
+
+function createTable(information)
+{
+    //clone the information except the first two keys
+    let {DB_NAME, Table_Name, ...cloneObject} = information;
+
+    let useDB = `use ${information.DB_NAME};`;
+
+
+    information.Table_Name = information.Table_Name.slice(1, information.Table_Name.length);
+
+    //string to create table
+    let create = `create table ${information.Table_Name} ( `;
+
+    let objectSize = Object.keys(cloneObject).length;
+    let ctr = 0;
+    for(let i in cloneObject)
+    {
+        create+=`${information[i][0]} ${information[i][1]}`;
+        ctr++;
+        if(ctr!=objectSize) create+=', ';
+    }
+    create+=' );';
+
+    //SQL queries
+    connectionHandler.query(useDB, 
+        (err, result) => { 
+                            if (err) console.log('Syntax Error');
+                            else console.log(`using ${information.DB_NAME} database`);
+                         } );
+
+    connectionHandler.query(create, 
+        (err, result) => {
+                            console.log(create);    
+                            if(err) console.log(err.message);
+                            else console.log(`${information.Table_Name} table is created`);
+                         } );
+}
+
+
+module.exports = { createDatabase : createDatabase, getList : getDatabasesList, createTable : createTable };
