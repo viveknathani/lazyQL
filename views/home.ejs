@@ -29,10 +29,13 @@
         <div id="containlist">
             
             <% for(let i = 0; i<dbnames.length; i++) { %>
+
             <table>
                 <tr>
                     <th class="first_column"><%= dbnames[i] %></th>
-                    <th><button type="button">Create table</button></th>
+                    <form action="/<%= dbnames[i] %>" method="POST">
+                    <th><button type="submit" onclick="">Create table</button></th>
+                    </form>
                     <th><button type="button">Generate .sql file</button></th>
                 </tr>
 
