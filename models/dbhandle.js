@@ -53,6 +53,18 @@ function createDatabase(databaseName, msgObject)
                                                         else console.log('lazQL database updated.');
                                                      } );
 
+                    connectionHandler.query(`use ${databaseName};`, 
+                                    (err, result) => {
+                                                        if(err) console.log(err.message);
+                                                        else console.log('attempt to make a default table');
+                                                     } );                                
+
+                    connectionHandler.query(`create table defaultTable (number int);`, 
+                    (err, result) => {
+                                        if(err) console.log(err.message);
+                                        else console.log('attempt successful');
+                                    } );                                                                 
+
                     console.log(msgObject);                        
                 }
             } );
@@ -66,30 +78,27 @@ function createDatabase(databaseName, msgObject)
     } );
 }
 
-function getDatabasesList(namesList, tablesList)
+function getDatabasesList(namesList)
 {
-
-            let useDB = `use lazyQL;`;   
-            let query = `select * from List`;
-            connectionHandler.query(useDB, 
-                (err, result) => { 
-                                    if (err) console.log('Syntax Error');
-                                    else console.log('Fetching list from lazyQL database...');
-                                 } );  
-            connectionHandler.query(query, 
-                (err, result) => { 
-                                    if (err) console.log('Syntax Error');
-                                    else
-                                    {
-                                        for(let i=0; i<result.length; i++)
-                                        {
-                                            namesList[i]=result[i].Names;
-                                        }
-                                    }              
-                                 } );
-                                 
+    let useDB = `use lazyQL;`;   
+    let query = `select * from List`;
+    connectionHandler.query(useDB, 
+        (err, result) => { 
+                            if (err) console.log('Syntax Error');
+                            else console.log('Fetching list from lazyQL database...');
+                            } );  
+    connectionHandler.query(query, 
+        (err, result) => { 
+                            if (err) console.log('Syntax Error');
+                            else
+                            {
+                                for(let i=0; i<result.length; i++)
+                                {
+                                    namesList[i]=result[i].Names;
+                                }
+                            }              
+                            } );        
 }
-
 
 function createTable(information)
 {
@@ -97,9 +106,6 @@ function createTable(information)
     let {DB_NAME, Table_Name, ...cloneObject} = information;
 
     let useDB = `use ${information.DB_NAME};`;
-
-
-    information.Table_Name = information.Table_Name.slice(1, information.Table_Name.length);
 
     //string to create table
     let create = `create table ${information.Table_Name} ( `;
@@ -129,5 +135,39 @@ function createTable(information)
                          } );
 }
 
+function getTablesList(dbNames, tablesList)
+{
+    for(let i = 0; i < dbNames.length; i++)
+    {
+        let containString = `Tables_in_${dbNames[i]}`;
+        let useDB = `use ${dbNames[i]}`;
 
-module.exports = { createDatabase : createDatabase, getList : getDatabasesList, createTable : createTable };
+        connectionHandler.query(useDB, 
+            (err, result) => { 
+                                if (err) console.log(err.message);
+                                else console.log(`Fetching tables from ${dbNames[i]}`);
+                            } );  
+
+        let tableQuery = `show tables;`;
+        
+        connectionHandler.query(tableQuery, 
+            (err, result) => {
+                                if(err) console.log(err.message);
+                                else
+                                {
+                                    for(let j = 0; j < result.length; j++)
+                                    {
+                                        tablesList[i]=result;
+                                    }
+                                }                                                        
+                            } );                      
+    }
+}
+
+
+module.exports = { 
+    createDatabase : createDatabase, 
+    getList : getDatabasesList, 
+    createTable : createTable,
+    getTables : getTablesList
+ };
