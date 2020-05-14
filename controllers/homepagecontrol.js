@@ -63,13 +63,13 @@ module.exports = function(app)
     app.post('/filledform', urlencodedParser, function(req, res) 
     {
         databaseHandler.createTable(req.body);
-        res.send('okay bye!');
+        res.sendFile('CreateTable.html', {root : 'public/assets'});
     } );
 
     app.post('/generate/:dbname', urlencodedParser, function(req, res) 
     {
         fileGenerator.generateSQLFile(req.params.dbname);
-        res.send('okay');
+        res.sendFile('File.html', {root : 'public/assets'});
     } );
 
     app.post('/:dbname', urlencodedParser, function(req, res) 
