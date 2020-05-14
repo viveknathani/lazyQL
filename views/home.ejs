@@ -34,7 +34,9 @@
                     <form action="/<%= dbnames[i] %>" method="POST">
                     <th><button type="submit" onclick="">Create table</button></th>
                     </form>
-                    <th><button type="button">Generate .sql file</button></th>
+                    <form action="/generate/<%= dbnames[i] %>" method="POST">
+                    <th><button type="submit">Generate .sql file</button></th>
+                    </form>
                 </tr>
                 
                 <% let my = Tables[i]; %>
