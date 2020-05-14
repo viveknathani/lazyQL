@@ -25,9 +25,7 @@
             </p>
 
         </div>
-
         <div id="containlist">
-            
             <% for(let i = 0; i<dbnames.length; i++) { %>
 
             <table>
@@ -38,19 +36,15 @@
                     </form>
                     <th><button type="button">Generate .sql file</button></th>
                 </tr>
-
-                <tr>
-                    <td colspan="3">Table 1</td>
-                </tr>
-
-                <tr>
-                    <td colspan="3">Table 2</td>
-                </tr>
-
-                <tr>
-                    <td colspan="3">Table 3</td>
-                </tr>
-
+                
+                <% let my = Tables[i]; %>
+                <%  for(let j=0; j<my.length; j++) {
+                    let containString = `Tables_in_${dbnames[i]}`; %>
+                    <tr>
+                        <td colspan="3"> <%= Tables[i][j][containString] %> </td>
+                    </tr>
+    
+                <%  } %>
             </table>
             <% } %>
 
