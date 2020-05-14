@@ -1,6 +1,7 @@
 'use strict';
 
 const databaseHandler = require('../models/dbhandle');
+const fileGenerator = require('../scripts/generate');
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -63,6 +64,12 @@ module.exports = function(app)
     {
         databaseHandler.createTable(req.body);
         res.send('okay bye!');
+    } );
+
+    app.post('/generate/:dbname', urlencodedParser, function(req, res) 
+    {
+        fileGenerator.generateSQLFile(req.params.dbname);
+        res.send('okay');
     } );
 
     app.post('/:dbname', urlencodedParser, function(req, res) 
