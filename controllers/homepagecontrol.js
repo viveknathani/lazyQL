@@ -10,11 +10,23 @@ module.exports = function(app)
     {
         let text = ' ';
         let namesList=[];
+        let tablesList=[100];
+        for(let i = 0; i < tablesList.length; i++)
+        {
+            tablesList[i]=new Array();
+        }
         databaseHandler.getList(namesList);
         setTimeout(function()
-                    {  
-                        res.render('home', {name:text, dbnames:namesList} );
-                    }, 10); 
+                    {   
+                        setTimeout(function()
+                        {
+                            databaseHandler.getTables(namesList, tablesList);
+                        }, 50);
+                    }, 100); 
+        setTimeout(function()
+                    {
+                        res.render('home', {name:text, dbnames:namesList, Tables:tablesList} );
+                    }, 200);            
     } );
 
     app.post('/', urlencodedParser,function(req, res)
@@ -23,12 +35,28 @@ module.exports = function(app)
         let databaseName = req.body.db_name;
         let paragraph = { text : " "};
         databaseHandler.createDatabase(databaseName, paragraph);
+        let tablesList=[100];
+        for(let i = 0; i < tablesList.length; i++)
+        {
+            tablesList[i]=new Array();
+        }
         setTimeout(function() 
                     {
                         databaseHandler.getList(namesList);
-                        console.log(`controllerTime : ${paragraph.text}`);
-                        setTimeout(() => { res.render('home', {name:paragraph.text, dbnames:namesList}); }, 30);
                     }, 20);
+
+        setTimeout(function()
+        {   
+            setTimeout(function()
+            {
+                databaseHandler.getTables(namesList, tablesList);
+            }, 50);
+        }, 100);             
+
+        setTimeout(function(){
+            console.log(`controllerTime : ${paragraph.text}`);
+            setTimeout(() => { res.render('home', {name:paragraph.text, dbnames:namesList, Tables:tablesList}); }, 30);
+        }, 200);
     } );
 
     app.post('/filledform', urlencodedParser, function(req, res) 
