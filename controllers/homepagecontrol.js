@@ -35,8 +35,24 @@ module.exports = function(app)
         let rowsList=[]
         let columns=[]
         databaseHandler.fetchTables(req.params.dbname, req.params.tablename, rowsList);
-        setTimeout(() => columns = Object.keys(rowsList[0]) , 10);
-        setTimeout(() => res.render('seeTable', {rows:rowsList, columns:columns}), 20);
+        setTimeout(() => 
+        {
+            if(typeof rowsList != "undefined" && rowsList != null && rowsList != null
+            && rowsList.length > 0)
+            {
+              columns = Object.keys(rowsList[0]);
+
+              setTimeout(() => res.render('seeTable', 
+                        {
+                            rows:rowsList, 
+                            columns:columns, 
+                            dbName:req.params.dbname,
+                            tableName:req.params.tablename
+                        }), 20);
+            }
+
+            else res.send('Oops! Table is empty!');
+        }, 10);
     } );
 
     app.post('/', urlencodedParser,function(req, res)
