@@ -164,10 +164,29 @@ function getTablesList(dbNames, tablesList)
     }
 }
 
+function fetchTables(dbName, tableName)
+{
+    let useDB = `use ${dbName};`;
+    let selectQuery = `select * from ${tableName};`;
+
+    connectionHandler.query(useDB, (err, result) => 
+    {
+        if(err) console.log(err.message);
+        else console.log(`using ${dbName} database`);
+    } );
+
+    connectionHandler.query(selectQuery, (err, result) => 
+    {
+        if(err) console.log(err.message);
+        else console.log(result);
+    } );
+}
+
 
 module.exports = { 
     createDatabase : createDatabase, 
     getList : getDatabasesList, 
     createTable : createTable,
-    getTables : getTablesList
+    getTables : getTablesList,
+    fetchTables : fetchTables
  };
