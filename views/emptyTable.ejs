@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title><%= tableName%></title>
+        <link rel="stylesheet" href="/assets/seeTable.css" type="text/css">
+    </head>
+    <body>
+        <div id="info">
+            <p><%= dbName%> : <%= tableName%></p>
+        </div>
+
+        <p>Table is empty!</p>
+
+        <div id="insert_card">
+            <h2>Insert</h2>
+            <form action="/insert/<%= dbName%>/<%= tableName%>" method="POST">
+                <% for(let i = 0; i<columns.length; i++) { %>
+                    <input placeholder="<%= columns[i] %>" name="<%= columns[i] %>">
+                <% } %>
+                <button type="submit" id="insert_button">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
