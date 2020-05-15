@@ -3,6 +3,12 @@
         <title>Your Table</title>
     </head>
     <body>
-        <p>simple!</p>
+        <table>
+            <tr>
+            <% for(let i = 0; i<columns.length; i++) { %>
+                <th><%= columns[i] %></th>
+            <% } %>    
+            </tr>
+        </table>
     </body>
 </html>
