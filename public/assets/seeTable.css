@@ -14,6 +14,11 @@ th, td{
     padding: 8px;
 }
 
+p{
+    font-size: 25px;
+    font-weight: 800;
+}
+
 th{
     color: white;
     font-weight: bold;
@@ -32,4 +37,51 @@ tr:hover{
 #info{
     font-size: 25px;
     font-weight: 800;
+    text-align: left;
+}
+
+#insert_card{
+    padding: 15px;
+    margin: auto;
+    margin-top: 5%;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    text-align: left;
+}
+
+#insert_card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+input{
+    margin-top: 3%;
+    display: block;
+    height: 40px;
+    width: 30%;
+    padding: 5px;
+    font-size: 24px;
+    margin-left: 3%;
+    text-align: left;
+    border-color: rgb(58, 58, 58);
+    border-width: 1px 1px 1px 1px;
+    background: transparent;
+}
+
+#insert_button{
+    float: right;
+    padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0.317rem;
+	background-color: #FF7B00;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 1rem;
+    line-height: 1.5;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	cursor: pointer;
+	-webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    margin-top: -40px;
 }
