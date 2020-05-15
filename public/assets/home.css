@@ -85,5 +85,10 @@ button:hover {
 	opacity: 0.85;
 }
 
+a:link, a:visited{
+    color: black;
+    text-decoration: none;
+}
+
 
 
