@@ -51,8 +51,24 @@ module.exports = function(app)
                         }), 20);
             }
 
-            else res.send('Oops! Table is empty!');
+            else
+            { 
+               databaseHandler.getColumnNames(req.params.dbname, req.params.tablename, columns);
+               setTimeout(() => res.render('emptyTable', 
+                        {
+                            columns:columns,
+                            dbName:req.params.dbname,
+                            tableName:req.params.tablename
+                        }), 20);
+            }    
         }, 10);
+    } );
+
+    app.post('/insert/:dbname/:tablename', urlencodedParser, function(req, res) 
+    {
+        console.log(req.body);
+        databaseHandler.insertValues(req.params.dbname, req.params.tablename, req.body);
+        res.redirect(`/${req.params.dbname}/${req.params.tablename}`);
     } );
 
     app.post('/', urlencodedParser,function(req, res)
