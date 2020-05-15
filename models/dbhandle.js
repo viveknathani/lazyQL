@@ -7,7 +7,7 @@ const connectionHandler = mysql.createConnection(
         database : 'lazyQL',
         host : 'localhost',
         user : 'root',
-        password : 'password'
+        password : 'password',
     } );
 
 function createDatabase(databaseName, msgObject)
@@ -84,7 +84,7 @@ function getDatabasesList(namesList)
     let query = `select * from List`;
     connectionHandler.query(useDB, 
         (err, result) => { 
-                            if (err) console.log('Syntax Error');
+                            if (err) console.log(err.message);
                             else console.log('Fetching list from lazyQL database...');
                             } );  
     connectionHandler.query(query, 

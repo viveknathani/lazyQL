@@ -30,6 +30,12 @@ module.exports = function(app)
                     }, 200);            
     } );
 
+    app.get('/:dbname/:tablename', urlencodedParser, function(req, res) 
+    {
+        console.log(req.params);
+        res.render('seeTable');
+    } );
+
     app.post('/', urlencodedParser,function(req, res)
     {
         let namesList=[];

@@ -43,7 +43,10 @@
                 <%  for(let j=0; j<my.length; j++) {
                     let containString = `Tables_in_${dbnames[i]}`; %>
                     <tr>
-                        <td colspan="3"> <%= Tables[i][j][containString] %> </td>
+                        <td colspan="3"> 
+                            <a href="/<%= dbnames[i] %>/<%= Tables[i][j][containString] %>">
+                            <%= Tables[i][j][containString] %> </td>
+                            </a>     
                     </tr>
     
                 <%  } %>
