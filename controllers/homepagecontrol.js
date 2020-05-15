@@ -32,8 +32,11 @@ module.exports = function(app)
 
     app.get('/:dbname/:tablename', urlencodedParser, function(req, res) 
     {
-        databaseHandler.fetchTables(req.params.dbname, req.params.tablename);
-        res.render('seeTable');
+        let rowsList=[]
+        let columns=[]
+        databaseHandler.fetchTables(req.params.dbname, req.params.tablename, rowsList);
+        setTimeout(() => columns = Object.keys(rowsList[0]) , 10);
+        setTimeout(() => res.render('seeTable', {rows:rowsList, columns:columns}), 20);
     } );
 
     app.post('/', urlencodedParser,function(req, res)
