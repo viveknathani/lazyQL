@@ -4,15 +4,15 @@ lazyQL is a web application that provides a really simple interface between the 
 
 ### Tech Stack 
 
-NodeJS for dealing with MySQL databases
-Express for robust handling of HTTP requests
-HTML, CSS, Vanilla Javascript for the front end.
+1. NodeJS for dealing with MySQL databases
+2. Express for robust handling of HTTP requests
+3. HTML, CSS, Vanilla Javascript for the front end.
 
 ### Dependencies
 
-EJS
-Express
-Body Parser
+1. EJS
+2. Express
+3. Body Parser
 
 ### Build
 
