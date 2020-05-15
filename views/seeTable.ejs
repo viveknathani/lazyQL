@@ -1,8 +1,12 @@
 <html>
     <head>
-        <title>Your Table</title>
+        <title><%= tableName%></title>
+        <link rel="stylesheet" href="/assets/seeTable.css" type="text/css">
     </head>
     <body>
+        <div id="info">
+            <p><%= dbName%> : <%= tableName%></p>
+        </div>
         <table>
             <tr>
             <% for(let i = 0; i<columns.length; i++) { %>
