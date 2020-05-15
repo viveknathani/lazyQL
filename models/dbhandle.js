@@ -164,7 +164,7 @@ function getTablesList(dbNames, tablesList)
     }
 }
 
-function fetchTables(dbName, tableName)
+function fetchTables(dbName, tableName, rowsList)
 {
     let useDB = `use ${dbName};`;
     let selectQuery = `select * from ${tableName};`;
@@ -178,7 +178,13 @@ function fetchTables(dbName, tableName)
     connectionHandler.query(selectQuery, (err, result) => 
     {
         if(err) console.log(err.message);
-        else console.log(result);
+        else
+        {
+            for(let i = 0; i < result.length; i++)
+            {
+                rowsList[i]=result[i];
+            }
+        }
     } );
 }
 
