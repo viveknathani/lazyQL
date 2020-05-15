@@ -188,11 +188,70 @@ function fetchTables(dbName, tableName, rowsList)
     } );
 }
 
+function insertValues(dbName, tableName, contentObject)
+{
+    let columns = Object.keys(contentObject);
+
+    let useDB = `use ${dbName};`;
+
+    connectionHandler.query(useDB, (err, result) => 
+    {
+        if(err) console.log(err.message);
+        else console.log(`using ${dbName} database`);
+    } );
+
+    let insertStatement = `insert into ${tableName} values (`;
+    
+    for(let i = 0; i < columns.length; i++)
+    {
+        if(i!=columns.length-1) insertStatement+=`${contentObject[columns[i]]}, `;
+        else insertStatement+=`${contentObject[columns[i]]}`;
+    }
+
+    insertStatement+=');';
+
+    connectionHandler.query(insertStatement, (err, result) => 
+    {
+        if(err) console.log(err.message);
+        else console.log(result);
+    } );
+}
+
+function getColumnNames(dbName, tableName, columns)
+{
+    let useDB = `use ${dbName};`;
+
+    connectionHandler.query(useDB, (err, result) => 
+    {
+        if(err) console.log(err.message);
+        else console.log(`using ${dbName} database`);
+    } );
+
+    let showColumns = `show columns from ${tableName};`;
+
+    connectionHandler.query(showColumns, (err, result) => 
+    {
+        if(err) console.log(err);
+        else
+        {
+            for(let i = 0; i < result.length; i++)
+            {
+                columns[i] = result[i].Field;
+            }
+            console.log(columns);
+        }
+    } );
+}
+
 
 module.exports = { 
     createDatabase : createDatabase, 
     getList : getDatabasesList, 
     createTable : createTable,
     getTables : getTablesList,
-    fetchTables : fetchTables
+    fetchTables : fetchTables,
+    insertValues : insertValues,
+    getColumnNames : getColumnNames
  };
+
+
