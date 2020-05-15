@@ -32,7 +32,7 @@ module.exports = function(app)
 
     app.get('/:dbname/:tablename', urlencodedParser, function(req, res) 
     {
-        console.log(req.params);
+        databaseHandler.fetchTables(req.params.dbname, req.params.tablename);
         res.render('seeTable');
     } );
 
