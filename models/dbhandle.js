@@ -1,3 +1,4 @@
+/* Functions to perform various database operations */
 'use strict';
 
 const mysql = require('mysql');
@@ -81,7 +82,9 @@ function createDatabase(databaseName, msgObject)
 function getDatabasesList(namesList)
 {
     let useDB = `use lazyQL;`;   
+
     let query = `select * from List`;
+    
     connectionHandler.query(useDB, 
         (err, result) => { 
                             if (err) console.log(err.message);
