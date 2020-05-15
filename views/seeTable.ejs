@@ -9,6 +9,13 @@
                 <th><%= columns[i] %></th>
             <% } %>    
             </tr>
+            <% for(let i = 0; i<rows.length; i++) { %>
+                <tr>
+                    <% for(let j = 0; j<columns.length; j++) { %>
+                        <td><%= rows[i][columns[j]] %></td>
+                    <% } %>    
+                </tr>
+            <% } %>
         </table>
     </body>
 </html>
